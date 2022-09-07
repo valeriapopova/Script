@@ -1,6 +1,7 @@
 """ Токен вк """
 token = ''
-
+group_token = ''
+group_id = ''
 ''' Авторизационные данные для google sheets'''
 auth_dict = {
       "type": "service_account",
@@ -21,3 +22,5 @@ age_to = 60
 sex = 1
 city = 'Самара'
 count = 5
+
+chat_id_data = {'chat_id': 390939831}

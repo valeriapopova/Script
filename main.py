@@ -10,7 +10,6 @@ def get_data_from_vk(token, age_from, age_to, sex, city , count):
     data_for_vk = {'token': token, 'age_from': age_from, 'age_to': age_to, 'sex': sex, 'city': city, 'count': count}
     r = requests.post(url_for_vk, data=data_for_vk)
     res = r.json()
-    #res.update(auth_dict)
     return res
 
 
@@ -19,12 +18,12 @@ def get_leads_from_vk():
     vk_url = 'http://127.0.0.1:5000/vk/756630756e645f336173313372545444'
     r = requests.post(vk_url)
     res = r.json()
-    #res.update(auth_dict)
     return res
 
 
 def append_values_into_sheets(res):
     """ Добавляет только значения в google sheets"""
+    res.update(auth_dict)
     url_for_sheets = 'http://127.0.0.1:5001/sheets/append_values'
     response = requests.post(url_for_sheets, json=res)
     return response
@@ -32,6 +31,7 @@ def append_values_into_sheets(res):
 
 def append_into_sheets(res):
     """ Добавляет данные в таблицу google sheets """
+    res.update(auth_dict)
     url_for_sheets = 'http://127.0.0.1:5001/sheets/append'
     response = requests.post(url_for_sheets, json=res)
     return response
@@ -39,6 +39,7 @@ def append_into_sheets(res):
 
 def clear_append_into_sheets(res):
     """ Перезаписывает данные в таблицу google sheets   """
+    res.update(auth_dict)
     url_for_sheets = 'http://127.0.0.1:5001/sheets/clear_append'
     response = requests.post(url_for_sheets, json=res)
     return response
@@ -46,6 +47,7 @@ def clear_append_into_sheets(res):
 
 def append_new_list(res):
     """ Добавляет данные в новый лист google sheets  """
+    res.update(auth_dict)
     url_for_sheets = 'http://127.0.0.1:5001/sheets/append_list'
     response = requests.post(url_for_sheets, json=res)
     return response
@@ -88,5 +90,4 @@ def post_to_bitrix(res, url):
 
 
 
-# res = get_leads_from_vk()
-# post_to_tg(res, 390939831)
+

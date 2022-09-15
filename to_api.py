@@ -46,6 +46,7 @@ def post_to_tg(res, chat_id, host='localhost'):
     """
     chat_id_data = {'chat_id': chat_id}
     res.update(chat_id_data)
+    print(res)
     url_for_tg = f'http://{host}:5001/telegram'
     response = requests.post(url_for_tg, json=res)
     return response

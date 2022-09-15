@@ -21,9 +21,8 @@ def get_account_fromto(account_id):
         print(f"The error '{e}' occurred")
 
 
-connective = get_account_fromto(1)
-print(connective)
-
+# connective = get_account_fromto(1)
+# print(connective)
 
 def vkleads_excel():
     """ Связка vk - excel """
@@ -36,7 +35,9 @@ def vkleads_tg(account_id):
     select_ = f""" SELECT tg_chat_id FROM account
         WHERE account.id={account_id}; """
     result = execute_read_query(connection_psql(), select_)
-    chat_id = [pair[0] for pair in result]
+    for pair in result:
+        for res in pair:
+            chat_id = res
     data = get_leads_from_vk()
     post_to_tg(data, chat_id)
 
@@ -46,7 +47,9 @@ def vkleads_email(account_id):
     select_ = f""" SELECT email FROM account
            WHERE account.id={account_id}; """
     result = execute_read_query(connection_psql(), select_)
-    email = [pair[0] for pair in result]
+    for pair in result:
+        for res in pair:
+            email = res
     data = get_leads_from_vk()
     post_email(data, email)
 
@@ -56,7 +59,9 @@ def vkleads_bitrix(account_id):
     select_ = f""" SELECT bitrix_url FROM account
                WHERE account.id={account_id}; """
     result = execute_read_query(connection_psql(), select_)
-    url = [pair[0] for pair in result]
+    for pair in result:
+        for res in pair:
+            url = res
     data = get_leads_from_vk()
     post_to_bitrix(data, url)
 
@@ -100,3 +105,6 @@ def vkleads_sheets_clearappend(account_id):
     data = get_leads_from_vk()
     clear_append_into_sheets(data, auth)
 
+
+
+vkleads_tg(1)

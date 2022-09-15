@@ -38,3 +38,11 @@ def execute_read_query(connection, query):
     except OperationalError as e:
         print(f"The error '{e}' occurred")
 
+
+# account_id = 1
+# select_ = f""" SELECT tg_chat_id FROM account
+#         WHERE account.id={account_id}; """
+# p = execute_read_query(connection_psql(), select_)
+# for pair in p:
+#     for t in pair:
+#         print(t)

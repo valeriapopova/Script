@@ -11,9 +11,9 @@ def get_search_data_from_vk(token, age_from, age_to, sex, city , count, host='lo
     return res
 
 
-def get_leads_from_vk(host='localhost'):
-    """ Забирает новые лиды из vk """
-    vk_url = f'http://{host}:5000/vk/get_leads'
-    r = requests.post(vk_url)
-    res = r.json()
-    return res
+# def get_leads_from_vk(host='localhost'):
+#     """ Забирает новые лиды из vk """
+#     vk_url = f'http://{host}:5000/vk/get_leads'
+#     r = requests.post(vk_url)
+#     res = r.json()
+#     return res

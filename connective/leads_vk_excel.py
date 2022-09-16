@@ -8,16 +8,16 @@ class VkExcel:
         self.auth_to = auth_to
         self.data = None
 
-    def get_leads_from_vk(self, host='localhost'):
+    def get_leads_from_vk(self, host='api.ecomru.ru'):
         """ Забирает новые лиды из vk """
         vk_url = f'http://{host}:5000/vk/get_leads'
         r = requests.post(vk_url)
         self.data = r.json()
         return self.data
 
-    def append_into_excel(self, host='localhost'):
+    def append_into_excel(self, host='api.ecomru.ru'):
         """ Добавляет данные в excel """
-        url_for_excel = f'http://{host}:63880/excel'
+        url_for_excel = f'http://{host}:63880/excel/post'
         response = requests.post(url_for_excel, json=self.data)
         return response
 

@@ -8,14 +8,14 @@ class VkBitrix:
         self.auth_to = auth_to
         self.data = None
 
-    def get_leads_from_vk(self, host='localhost'):
+    def get_leads_from_vk(self, host='api.ecomru.ru'):
         """ Забирает новые лиды из vk """
         vk_url = f'http://{host}:5000/vk/get_leads'
         r = requests.post(vk_url)
         self.data = r.json()
         return self.data
 
-    def post_to_bitrix(self, host='localhost'):
+    def post_to_bitrix(self, host='api.ecomru.ru'):
         """ Отправляет новые лиды на в Birix24 по url """
         data = {'url': self.auth_to['url']}
         self.data.update(data)

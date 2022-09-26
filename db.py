@@ -16,7 +16,6 @@ def connection_psql():
            )
     return connection_
 
-conn = connection_psql()
 
 def execute_query(connection, query):
     connection.autocommit = True

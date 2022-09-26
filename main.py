@@ -8,6 +8,8 @@ from pprint import pprint
 import now as now
 import psycopg2
 
+from connective.bitrix_excel import BitrixExcel
+from connective.bitrix_sheets import BitrixSheets
 from connective.leads_vk_bitrix import VkBitrix
 from connective.leads_vk_email import VkEmail
 from connective.leads_vk_excel import VkExcel
@@ -30,34 +32,69 @@ def get_fromto():
                 new = VkExcel(auth_from, auth_to)
                 new.get_leads_from_vk()
                 new.append_into_excel()
+
             elif fromto_id == 2:
                 new = VkSheets(auth_from, auth_to)
                 new.get_leads_from_vk()
                 new.append_values_into_sheets()
+
             elif fromto_id == 3:
                 new = VkSheets(auth_from, auth_to)
                 new.get_leads_from_vk()
                 new.append_into_sheets()
+
             elif fromto_id == 4:
                 new = VkSheets(auth_from, auth_to)
                 new.get_leads_from_vk()
                 new.clear_append_into_sheets()
+
             elif fromto_id == 5:
                 new = VkSheets(auth_from, auth_to)
                 new.get_leads_from_vk()
                 new.append_new_list()
+
             elif fromto_id == 6:
                 new = VkTelegram(auth_from, auth_to)
                 new.get_leads_from_vk()
                 new.post_to_tg()
+
             elif fromto_id == 7:
                 new = VkEmail(auth_from, auth_to)
                 new.get_leads_from_vk()
                 new.post_email()
+
             elif fromto_id == 8:
                 new = VkBitrix(auth_from, auth_to)
                 new.get_leads_from_vk()
                 new.post_to_bitrix()
+
+            elif fromto_id == 9:
+                new = BitrixSheets(auth_from, auth_to)
+                new.get_leads_bitrix()
+                new.append_values_into_sheets_b()
+
+            elif fromto_id == 10:
+                new = BitrixSheets(auth_from, auth_to)
+                new.get_leads_bitrix()
+                new.append_into_sheets_b()
+
+            elif fromto_id == 11:
+                new = BitrixSheets(auth_from, auth_to)
+                new.get_leads_bitrix()
+                new.clear_append_into_sheets_b()
+
+            elif fromto_id == 12:
+                new = BitrixSheets(auth_from, auth_to)
+                new.get_leads_bitrix()
+                new.append_new_list_b()
+
+            elif fromto_id == 13:
+                new = BitrixExcel(auth_from, auth_to)
+                new.get_leads_bitrix()
+                new.append_into_excel()
+
+            else:
+                print('Tакой связки нет')
 
     except ConnectionError as e:
         print(f"The error '{e}' occurred")
@@ -84,7 +121,7 @@ if __name__ == "__main__":
 
 # def get_account_fromto(account_id):
 #     """ Получаем связки пользователя """
-#     try:
+#     try: WHERE account_connective.id=6
 #         select_ = f"""SELECT fromto_id FROM account_connective
 #         WHERE account_connective.id={account_id};"""
 #         result = execute_read_query(connection_psql(), select_)

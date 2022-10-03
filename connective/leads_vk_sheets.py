@@ -17,6 +17,21 @@ class VkSheets:
         self.data = r.json()
         return self.data
 
+    def get_targeting(self, host='localhost'):
+        """Возвращает параметры таргетинга рекламных объявлений"""
+        url = f'http://{host}:5000/vk/ads_get_targeting'
+        r = requests.post(url, json=json.loads(self.auth_from))
+        res = r.json()
+        return res
+
+    def get_flood_stats(self, host='localhost'):
+        """Возвращает подробную статистику по охвату рекламных записей из объявлений и кампаний для
+            продвижения записей сообщества."""
+        url = f'http://{host}:5000/vk/ads_get_flood_stats'
+        r = requests.post(url, json=json.loads(self.auth_from))
+        res = r.json()
+        return res
+
     def append_values_into_sheets(self, host='api.ecomru.ru'):
         """ Добавляет только значения в google sheets"""
         self.data.update(json.loads(self.auth_to))

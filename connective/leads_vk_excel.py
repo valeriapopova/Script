@@ -1,3 +1,5 @@
+import json
+
 import requests
 
 
@@ -7,6 +9,21 @@ class VkExcel:
         self.auth_from = auth_from
         self.auth_to = auth_to
         self.data = None
+
+    def get_targeting(self, host='localhost'):
+        """Возвращает параметры таргетинга рекламных объявлений"""
+        url = f'http://{host}:5000/vk/ads_get_targeting'
+        r = requests.post(url, json=json.loads(self.auth_from))
+        res = r.json()
+        return res
+
+    def get_flood_stats(self, host='localhost'):
+        """Возвращает подробную статистику по охвату рекламных записей из объявлений и кампаний для
+            продвижения записей сообщества."""
+        url = f'http://{host}:5000/vk/ads_get_flood_stats'
+        r = requests.post(url, json=json.loads(self.auth_from))
+        res = r.json()
+        return res
 
     def get_leads_from_vk(self, host='localhost'):
         """ Забирает новые лиды из vk """

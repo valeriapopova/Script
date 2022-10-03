@@ -93,6 +93,56 @@ def get_fromto():
                 new.get_leads_bitrix()
                 new.append_into_excel()
 
+            elif fromto_id == 14:
+                new = VkExcel(auth_from, auth_to)
+                new.get_targeting()
+                new.append_into_excel()
+
+            elif fromto_id == 15:
+                new = VkSheets(auth_from, auth_to)
+                new.get_targeting()
+                new.append_values_into_sheets()
+
+            elif fromto_id == 16:
+                new = VkSheets(auth_from, auth_to)
+                new.get_targeting()
+                new.append_into_sheets()
+
+            elif fromto_id == 17:
+                new = VkSheets(auth_from, auth_to)
+                new.get_targeting()
+                new.clear_append_into_sheets()
+
+            elif fromto_id == 18:
+                new = VkSheets(auth_from, auth_to)
+                new.get_targeting()
+                new.append_new_list()
+
+            elif fromto_id == 19:
+                new = VkExcel(auth_from, auth_to)
+                new.get_flood_stats()
+                new.append_into_excel()
+
+            elif fromto_id == 20:
+                new = VkSheets(auth_from, auth_to)
+                new.get_flood_stats()
+                new.append_values_into_sheets()
+
+            elif fromto_id == 21:
+                new = VkSheets(auth_from, auth_to)
+                new.get_flood_stats()
+                new.append_into_sheets()
+
+            elif fromto_id == 22:
+                new = VkSheets(auth_from, auth_to)
+                new.get_flood_stats()
+                new.clear_append_into_sheets()
+
+            elif fromto_id == 23:
+                new = VkSheets(auth_from, auth_to)
+                new.get_flood_stats()
+                new.append_new_list()
+
             else:
                 print('Tакой связки нет')
 

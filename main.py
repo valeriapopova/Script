@@ -21,13 +21,14 @@ from db import *
 def get_fromto():
     """ Получаем связки пользователей """
     try:
-        select_ = "SELECT * FROM account_connective"
+        select_ = "SELECT * FROM account_connective WHERE account_connective.id=9"
         result = execute_read_query(connection_psql(), select_)
         for res in result:
             res = list(res)
             fromto_id = res[1]
             auth_to = res[2]
             auth_from = res[3]
+
             if fromto_id == 1:
                 new = VkExcel(auth_from, auth_to)
                 new.get_leads_from_vk()
@@ -143,6 +144,15 @@ def get_fromto():
                 new.get_flood_stats()
                 new.append_new_list()
 
+            elif fromto_id == 24:
+                new = VkBitrix(auth_from, auth_to)
+                new.get_leads_from_vk()
+                new.post_new_contact_to_bitrix()
+
+            elif fromto_id == 25:
+                new = VkBitrix(auth_from, auth_to)
+                new.get_leads_from_vk()
+                new.new_feed_mess_to_bitrix()
             else:
                 print('Tакой связки нет')
 

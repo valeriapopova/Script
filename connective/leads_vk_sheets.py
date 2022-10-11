@@ -13,9 +13,32 @@ class VkSheets:
     def get_leads_from_vk(self, host='api.ecomru.ru'):
         """ Забирает новые лиды из vk """
         vk_url = f'http://{host}:5000/vk/get_leads'
-        r = requests.post(vk_url)
+        r = requests.post(vk_url, json=json.loads(self.auth_from))
         self.data = r.json()
         return self.data
+
+    def webhook_vk(self, host='api.ecomru.ru'):
+        """Callback запросы"""
+        key = self.auth_from['key']
+        vk_url = f'http://{host}:5000/vk//vk/online_notification/{key}'
+        r = requests.post(vk_url, json=json.loads(self.auth_from))
+        self.data = r.json()
+        return self.data
+
+    def get_budget(self, host='api.ecomru.ru'):
+        """Возвращает текущий бюджет рекламного кабинета."""
+        vk_url = f'http://{host}:5000/vk/ads_get_budget'
+        r = requests.post(vk_url, json=json.loads(self.auth_from))
+        self.data = r.json()
+        return self.data
+
+    def get_statistic(host='localhost'):
+        """Возвращает статистику показателей эффективности по рекламным объявлениям,
+            кампаниям, клиентам или всему кабинету."""
+        url = f'http://{host}:5000/vk/ads_get_statistic'
+        r = requests.post(url, json=json.loads(self.auth_from))
+        res = r.json()
+        return res
 
     def get_targeting(self, host='localhost'):
         """Возвращает параметры таргетинга рекламных объявлений"""

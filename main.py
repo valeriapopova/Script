@@ -10,11 +10,11 @@ import psycopg2
 
 from connective.bitrix_excel import BitrixExcel
 from connective.bitrix_sheets import BitrixSheets
-from connective.leads_vk_bitrix import VkBitrix
-from connective.leads_vk_email import VkEmail
-from connective.leads_vk_excel import VkExcel
-from connective.leads_vk_sheets import VkSheets
-from connective.leads_vk_tg import VkTelegram
+from connective.vk_bitrix import VkBitrix
+from connective.vk_email import VkEmail
+from connective.vk_excel import VkExcel
+from connective.vk_sheets import VkSheets
+from connective.vk_tg import VkTelegram
 from db import *
 
 

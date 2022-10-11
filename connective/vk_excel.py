@@ -26,6 +26,28 @@ class VkExcel:
         print(self.data)
         return self.data
 
+    def webhook_vk(self, host='api.ecomru.ru'):
+        """Callback запросы"""
+        key = self.auth_from['key']
+        vk_url = f'http://{host}:5000/vk/online_notification/{key}'
+        r = requests.post(vk_url, json=json.loads(self.auth_from))
+        self.data = r.json()
+        return self.data
+
+    def get_statistic_current_day(self, host='localhost'):
+        """Выгружается информация по расходам, просмотрам и кликам за текущий день."""
+        url = f'http://{host}:5000/vk/ads_get_statistic_current_day'
+        r = requests.post(url, json=json.loads(self.auth_from))
+        res = r.json()
+        return res
+
+    def get_statistic_yesterday(self, host='localhost'):
+        """Выгружается информация по расходам, просмотрам и кликам за вчерашний день. """
+        url = f'http://{host}:5000/vk/ads_get_statistic_yesterday'
+        r = requests.post(url, json=json.loads(self.auth_from))
+        res = r.json()
+        return res
+
     def get_leads_from_vk(self, host='localhost'):
         """ Забирает новые лиды из vk """
         vk_url = f'http://{host}:5000/vk/get_leads'

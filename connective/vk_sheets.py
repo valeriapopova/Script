@@ -32,10 +32,16 @@ class VkSheets:
         self.data = r.json()
         return self.data
 
-    def get_statistic(host='localhost'):
-        """Возвращает статистику показателей эффективности по рекламным объявлениям,
-            кампаниям, клиентам или всему кабинету."""
-        url = f'http://{host}:5000/vk/ads_get_statistic'
+    def get_statistic_current_day(self, host='localhost'):
+        """Выгружается информация по расходам, просмотрам и кликам за текущий день."""
+        url = f'http://{host}:5000/vk/ads_get_statistic_current_day'
+        r = requests.post(url, json=json.loads(self.auth_from))
+        res = r.json()
+        return res
+
+    def get_statistic_yesterday(self, host='localhost'):
+        """Выгружается информация по расходам, просмотрам и кликам за вчерашний день. """
+        url = f'http://{host}:5000/vk/ads_get_statistic_yesterday'
         r = requests.post(url, json=json.loads(self.auth_from))
         res = r.json()
         return res

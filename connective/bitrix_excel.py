@@ -12,7 +12,7 @@ class BitrixExcel:
         self.data = None
 
     def get_leads_bitrix(self, host='localhost'):
-        """ Забирает новые лиды из Birix24  """
+        """ Забирает все лиды из Birix24  """
         url = f'http://{host}:5001/bitrix/get_leads'
         r = requests.post(url, json=json.loads(self.auth_from))
         self.data = r.json()

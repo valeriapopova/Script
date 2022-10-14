@@ -32,6 +32,13 @@ class VkSheets:
         self.data = r.json()
         return self.data
 
+    def get_month_statistic(self, host='localhost'):
+        """Выгружается информация по расходам, просмотрам и кликам за последние 30 дней."""
+        url = f'http://{host}:5000/vk/ads_get_month_statistic'
+        r = requests.post(url, json=json.loads(self.auth_from))
+        res = r.json()
+        return res
+
     def get_statistic_current_day(self, host='localhost'):
         """Выгружается информация по расходам, просмотрам и кликам за текущий день."""
         url = f'http://{host}:5000/vk/ads_get_statistic_current_day'
@@ -86,5 +93,12 @@ class VkSheets:
         """ Добавляет данные в новый лист google sheets  """
         self.data.update(json.loads(self.auth_to))
         url_for_sheets = f'http://{host}:5001/google_sheets/append_list'
+        response = requests.post(url_for_sheets, json=self.data)
+        return response
+
+    def update_values(self, host='api.ecomru.ru'):
+        """ Обновляет строку """
+        self.data.update(self.auth_to)
+        url_for_sheets = f'http://{host}:5001/google_sheets/update_row'
         response = requests.post(url_for_sheets, json=self.data)
         return response

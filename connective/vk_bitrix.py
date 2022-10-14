@@ -25,6 +25,13 @@ class VkBitrix:
         self.data = r.json()
         return self.data
 
+    def post_message_bitrix(self, host='localhost'):
+        """Отправка сообщения в чат"""
+        self.data.update(json.loads(self.auth_to))
+        url = f'http://{host}:5001/bitrix/new_message'
+        response = requests.post(url, json=self.data)
+        return response
+
     def post_leads_to_bitrix(self, host='localhost'):
         """ Отправляет новые лиды в Birix24 по url """
         self.data.update(json.loads(self.auth_to))

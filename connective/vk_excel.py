@@ -10,6 +10,13 @@ class VkExcel:
         self.auth_to = auth_to
         self.data = None
 
+    def get_budget(self, host='api.ecomru.ru'):
+        """Возвращает текущий бюджет рекламного кабинета."""
+        vk_url = f'http://{host}:5000/vk/ads_get_budget'
+        r = requests.post(vk_url, json=json.loads(self.auth_from))
+        self.data = r.json()
+        return self.data
+
     def get_targeting(self, host='localhost'):
         """Возвращает параметры таргетинга рекламных объявлений"""
         url = f'http://{host}:5000/vk/ads_get_targeting'
@@ -33,6 +40,13 @@ class VkExcel:
         r = requests.post(vk_url, json=json.loads(self.auth_from))
         self.data = r.json()
         return self.data
+
+    def get_month_statistic(self, host='localhost'):
+        """Выгружается информация по расходам, просмотрам и кликам за последние 30 дней."""
+        url = f'http://{host}:5000/vk/ads_get_month_statistic'
+        r = requests.post(url, json=json.loads(self.auth_from))
+        res = r.json()
+        return res
 
     def get_statistic_current_day(self, host='localhost'):
         """Выгружается информация по расходам, просмотрам и кликам за текущий день."""

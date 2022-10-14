@@ -3,7 +3,7 @@ import json
 import requests
 
 
-class JivoExcel:
+class JivoSheets:
 
     def __init__(self, auth_from, auth_to):
         self.auth_from = auth_from
@@ -85,3 +85,11 @@ class JivoExcel:
         url_for_sheets = f'http://{host}:5001/google_sheets/append_list'
         response = requests.post(url_for_sheets, json=self.data)
         return response
+
+    def update_values(self, host='api.ecomru.ru'):
+        """ Обновляет строку """
+        self.data.update(self.auth_to)
+        url_for_sheets = f'http://{host}:5001/google_sheets/update_row'
+        response = requests.post(url_for_sheets, json=self.data)
+        return response
+

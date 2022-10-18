@@ -19,6 +19,13 @@ class BitrixSheets:
         print(self.data)
         return self.data
 
+    def get_contacts_list_bitrix(self, host='localhost'):
+        """ Забирает все контакты из Birix24  """
+        url = f'http://{host}:5001/bitrix/get_contact_list'
+        r = requests.post(url, json=json.loads(self.auth_from))
+        self.data = r.json()
+        return self.data
+
     def append_values_into_sheets_b(self, host='api.ecomru.ru'):
         """ Добавляет только значения в google sheets"""
         self.data.update(json.loads(self.auth_to))

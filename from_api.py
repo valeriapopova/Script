@@ -83,6 +83,23 @@ def get_flood_stats(host='localhost'):
     res = r.json()
     return res
 
+#vk_market
+
+def market_get_product_by_id(self, host='localhost'):
+    """ Возвращает информацию о товарах по идентификаторам. """
+    vk_url = f'http://{host}:5000/vk/market_get_product_by_id'
+    r = requests.post(vk_url, json=self.auth_from)
+    self.data = r.json()
+    return self.data
+
+
+def market_get_order_by_id(self, host='localhost'):
+    """ Возвращает заказ по идентификатору."""
+    vk_url = f'http://{host}:5000/vk/market_get_order_by_id'
+    r = requests.post(vk_url, json=self.auth_from)
+    self.data = r.json()
+    return self.data
+
 
 #JivoChat
 
@@ -135,6 +152,74 @@ def webhook_offline(host='lk.ecomru.ru'):
     return data
 
 
+#bitrix
+def search_user_by_id(self, host='localhost'):
+    """ Поиск сотрудника по id """
+    url = f'http://{host}:5001/bitrix/search_user_id'
+    r = requests.post(url, json=json.loads(self.auth_from))
+    self.data = r.json()
+    return self.data
 
+
+def search_user_by_email(self, host='localhost'):
+    """ Поиск сотрудника по email """
+    url = f'http://{host}:5001/bitrix/search_user_email'
+    r = requests.post(url, json=json.loads(self.auth_from))
+    self.data = r.json()
+    return self.data
+
+def search_contact_by_id(self, host='localhost'):
+    """Возвращает контакт по идентификатору."""
+    url = f'http://{host}:5001/bitrix/search_contact_id'
+    r = requests.post(url, json=json.loads(self.auth_from))
+    self.data = r.json()
+    return self.data
+
+
+def search_deal_by_id(self, host='localhost'):
+    """Возвращает сделку по идентификатору."""
+    url = f'http://{host}:5001/bitrix/search_deal_id'
+    r = requests.post(url, json=json.loads(self.auth_from))
+    self.data = r.json()
+    return self.data
+
+
+def search_invoice_by_id(self, host='localhost'):
+    """Возвращает счет по идентификатору."""
+    url = f'http://{host}:5001/bitrix/search_invoice_id'
+    r = requests.post(url, json=json.loads(self.auth_from))
+    self.data = r.json()
+    return self.data
+
+
+def search_product_by_id(self, host='localhost'):
+    """Возвращает счет по идентификатору."""
+    url = f'http://{host}:5001/bitrix/search_product_id'
+    r = requests.post(url, json=json.loads(self.auth_from))
+    self.data = r.json()
+    return self.data
+
+
+def search_company_by_id(self, host='localhost'):
+    """Возвращает компанию по идентификатору."""
+    url = f'http://{host}:5001/bitrix/search_company_id'
+    r = requests.post(url, json=json.loads(self.auth_from))
+    self.data = r.json()
+    return self.data
+
+def tel_reqister(self, host='localhost'):
+    """Метод регистрирует звонок в Битрикс24, для чего ищет в CRM соответствующий номеру объект"""
+    self.data.update(json.loads(self.auth_from))
+    url = f'http://{host}:5001/bitrix/tel_reqister'
+    response = requests.post(url, json=self.data)
+    return response
+
+
+def tel_finish(self, host='localhost'):
+    """Метод завершает звонок, фиксирует его в статистике, скрывает у пользователя карточку звонка."""
+    self.data.update(json.loads(self.auth_from))
+    url = f'http://{host}:5001/bitrix/tel_finish'
+    response = requests.post(url, json=self.data)
+    return response
 
 

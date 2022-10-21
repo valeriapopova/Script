@@ -8,12 +8,14 @@ from psycopg2 import OperationalError
 
 def connection_psql():
     connection_ = psycopg2.connect(
-           dbname='integration_db',
-           user=DB_USER,
-           password=DB_PASSWORD,
-           target_session_attrs='read-write',
-           sslmode='verify-full'
-           )
+                host='rc1b-itt1uqz8cxhs0c3d.mdb.yandexcloud.net',
+                port='6432',
+                dbname='market_db',
+                user=DB_USER,
+                password=DB_PASSWORD,
+                target_session_attrs='read-write',
+                sslmode='verify-full'
+                )
     return connection_
 
 
@@ -38,10 +40,3 @@ def execute_read_query(connection, query):
         print(f"The error '{e}' occurred")
 
 
-# account_id = 1
-# select_ = f""" SELECT tg_chat_id FROM account
-#         WHERE account.id={account_id}; """
-# p = execute_read_query(connection_psql(), select_)
-# for pair in p:
-#     for t in pair:
-#         print(t)

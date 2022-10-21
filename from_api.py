@@ -28,17 +28,34 @@ import requests
 #     return res
 
 
+def get_all_rows_from_google_sheets(self, host='localhost'):
+    """Получить все строки из таблицы google sheets"""
+    url = f'http://{host}:5000/google_sheets/get_all_rows'
+    r = requests.post(url, json=json.loads(self.auth_from))
+    res = r.json()
+    return res
+
+
+def google_sheets_search_row(self, host='localhost'):
+    """Найти строку в таблице google sheets"""
+    url = f'http://{host}:5000/google_sheets/search_row'
+    r = requests.post(url, json=json.loads(self.auth_from))
+    res = r.json()
+    return res
+
+
+def google_sheets_search_rows(self, host='localhost'):
+    """Найти несколько строк в таблице google sheets"""
+    url = f'http://{host}:5000/google_sheets/search_rows'
+    r = requests.post(url, json=json.loads(self.auth_from))
+    res = r.json()
+    return res
+
+
+
 
 #VkAds Этот метод можно вызвать с ключом доступа пользователя.
 #Требуются права доступа: ads.
-
-def get_statistic(host='localhost'):
-    """Возвращает статистику показателей эффективности по рекламным объявлениям,
-        кампаниям, клиентам или всему кабинету."""
-    url = f'http://{host}:5000/vk/ads_get_statistic'
-    r = requests.post(url, json=json.loads(auth_from))
-    res = r.json()
-    return res
 
 
 def get_demographics(host='localhost'):

@@ -96,7 +96,7 @@ class VkSheets:
         response = requests.post(url_for_sheets, json=self.data)
         return response
 
-    def update_values(self, host='api.ecomru.ru'):
+    def update_row(self, host='api.ecomru.ru'):
         """ Обновляет строку """
         self.data.update(self.auth_to)
         url_for_sheets = f'http://{host}:5001/google_sheets/update_row'

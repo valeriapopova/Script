@@ -1,3 +1,4 @@
+import json
 
 import requests
 
@@ -110,7 +111,7 @@ def market_add_album(self, host='localhost'):
 
 
 def market_edit_album(self, host='localhost'):
-    """ Редактирует подборку с товарами.""""
+    """ Редактирует подборку с товарами."""
     self.data.update(json.loads(self.auth_to))
     url = f'http://{host}:5000/vk/market_edit_album'
     response = requests.post(url, json=self.data)
@@ -124,70 +125,29 @@ def market_add_to_album(self, host='localhost'):
     response = requests.post(url, json=self.data)
     return response
 
+# sheets
 
-# def append_values_into_sheets(res, auth_dict, host='localhost'):
-#     """ Добавляет только значения в google sheets"""
-#     res.update(auth_dict)
-#     url_for_sheets = f'http://{host}:5001/sheets/append_values'
-#     response = requests.post(url_for_sheets, json=res)
-#     return response
-#
-#
-# def append_into_sheets(res, auth_dict, host='localhost'):
-#     """ Добавляет данные в таблицу google sheets """
-#     res.update(auth_dict)
-#     url_for_sheets = f'http://{host}:5001/sheets/append'
-#     response = requests.post(url_for_sheets, json=res)
-#     return response
-#
-#
-# def clear_append_into_sheets(res, auth_dict, host='localhost'):
-#     """ Перезаписывает данные в таблицу google sheets   """
-#     res.update(auth_dict)
-#     url_for_sheets = f'http://{host}:5001/sheets/clear_append'
-#     response = requests.post(url_for_sheets, json=res)
-#     return response
-#
-#
-# def append_new_list(res, auth_dict, host='localhost'):
-#     """ Добавляет данные в новый лист google sheets  """
-#     res.update(auth_dict)
-#     url_for_sheets = f'http://{host}:5001/sheets/append_list'
-#     response = requests.post(url_for_sheets, json=res)
-#     return response
-#
-# def append_into_excel(res, host='localhost'):
-#     """ Добавляет данные в excel """
-#     url_for_excel = f'http://{host}:5001/excel'
-#     response = requests.post(url_for_excel, json=res)
-#     return response
-#
-#
-# def post_to_tg(res, chat_id, host='localhost'):
-#     """ Отправляет новые лиды в телеграм чат
-#     (принимает на вход chat_id, узнать его можно у бота @LeadsFromVk написав /start)
-#     """
-#     chat_id_data = {'chat_id': chat_id}
-#     res.update(chat_id_data)
-#     print(res)
-#     url_for_tg = f'http://{host}:5001/telegram'
-#     response = requests.post(url_for_tg, json=res)
-#     return response
-#
-#
-# def post_email(res, email, host='localhost'):
-#     """ Отправляет новые лиды на указанную почту"""
-#     data = {'to': email}
-#     res.update(data)
-#     url = f'http://{host}:5001/email/post'
-#     response = requests.post(url, json=res)
-#     return response
-#
-#
-# def post_to_bitrix(res, url, host='localhost'):
-#     """ Отправляет новые лиды на в Birix24 по url """
-#     data = {'url': url}
-#     res.update(data)
-#     url = f'http://{host}:5001/bitrix/post'
-#     response = requests.post(url, json=res)
-#     return response
+def update_row_sheets(self, host='localhost'):
+    """Обновляет/создает строку"""
+    self.data.update(json.loads(self.auth_to))
+    url_for_sheets = f'http://{host}:5001/google_sheets/update_row'
+    response = requests.post(url_for_sheets, json=self.data)
+    return response
+
+
+def update_row_list_sheets(self, host='localhost'):
+    """ Обновляет строки(массив)"""
+    self.data.update(json.loads(self.auth_to))
+    url_for_sheets = f'http://{host}:5001/google_sheets/update_row_list'
+    response = requests.post(url_for_sheets, json=self.data)
+    return response
+
+
+def delete_row_sheets(self, host='localhost'):
+    """ Удаляет строку """
+    self.data.update(json.loads(self.auth_to))
+    url_for_sheets = f'http://{host}:5001/google_sheets/delete_row'
+    response = requests.post(url_for_sheets, json=self.data)
+    return response
+
+

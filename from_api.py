@@ -240,3 +240,19 @@ def tel_finish(self, host='localhost'):
     return response
 
 
+# yandex_market
+
+def conversion_goal(self, host='localhost'):
+    """ Получить конверсии по целям """
+    self.data.update(json.loads(self.auth_from))
+    url_for_sheets = f'http://{host}:52763/yandex/metrica/conversion_goal'
+    response = requests.post(url_for_sheets, json=self.data)
+    return response
+
+
+def get_utm_report(self, host='localhost'):
+    """Выгрузка отчета UTM метки по цели"""
+    self.data.update(json.loads(self.auth_from))
+    url_for_sheets = f'http://{host}:52763/yandex/metrica/utm'
+    response = requests.post(url_for_sheets, json=self.data)
+    return response

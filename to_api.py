@@ -23,7 +23,7 @@ def new_product_to_bitrix(self, host='localhost'):
 def update_product_bitrix(self, host='localhost'):
     """Обновляет товар"""
     self.data.update(json.loads(self.auth_to))
-    url = f'http://{host}:5001/bitrix/new_product'
+    url = f'http://{host}:5001/bitrix/update_product'
     response = requests.post(url, json=self.data)
     return response
 
@@ -34,6 +34,7 @@ def new_element_to_bitrix(self, host='localhost'):
     url = f'http://{host}:5001/bitrix/new_element'
     response = requests.post(url, json=self.data)
     return response
+
 
 def update_element_bitrix(self, host='localhost'):
     """Обновляет элемент списка'"""
@@ -151,3 +152,43 @@ def delete_row_sheets(self, host='localhost'):
     return response
 
 
+#yandex_market
+
+def post_expences(self, host='localhost'):
+    """Загрузка расходов на рекламу"""
+    self.data.update(json.loads(self.auth_to))
+    url_for_sheets = f'http://{host}:52763/yandex/metrica/post_expences'
+    response = requests.post(url_for_sheets, json=self.data)
+    return response
+
+
+def create_client(self, host='localhost'):
+    """Новая информация о клиентах добавляется(обновляется) к ранее загруженной."""
+    self.data.update(json.loads(self.auth_to))
+    url_for_sheets = f'http://{host}:52763/yandex/metrica/create_client'
+    response = requests.post(url_for_sheets, json=self.data)
+    return response
+
+
+def create_order(self, host='localhost'):
+    """Новая информация о заказах добавляется(обновляется) к ранее загруженной."""
+    self.data.update(json.loads(self.auth_to))
+    url_for_sheets = f'http://{host}:52763/yandex/metrica/create_order'
+    response = requests.post(url_for_sheets, json=self.data)
+    return response
+
+
+def post_calls(self, host='localhost'):
+    """Загрузка звонков"""
+    self.data.update(json.loads(self.auth_to))
+    url_for_sheets = f'http://{host}:52763/yandex/metrica/post_calls'
+    response = requests.post(url_for_sheets, json=self.data)
+    return response
+
+
+def status_orders(self, host='localhost'):
+    """Сопоставление статусов заказов"""
+    self.data.update(json.loads(self.auth_to))
+    url_for_sheets = f'http://{host}:52763/yandex/metrica/status_orders'
+    response = requests.post(url_for_sheets, json=self.data)
+    return response
